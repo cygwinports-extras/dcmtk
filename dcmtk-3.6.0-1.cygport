@@ -1,0 +1,11 @@
+inherit cmake
+
+
+HOMEPAGE="http://dicom.offis.de/dcmtk.php.en"
+SRC_URI="ftp://dicom.offis.de/pub/dicom/offis/software/${PN}/${PN}${PV//.}/${P}.tar.gz"
+
+PKG_NAMES="${PN} lib${PN}-devel"
+dcmtk_CONTENTS="etc/ usr/bin/*.exe usr/share/"
+libdcmtk_devel_CONTENTS="usr/include/ usr/lib/"
+
+CYGCMAKE_ARGS="-DDCMTK_WITH_XML=YES -DCMTK_WITH_OPENSSL=YES"
