@@ -1,8 +1,0 @@
-category: Graphics
-requires: libgcc1 libpng14 libstdc++6 libtiff5 libxml2 zlib0
-sdesc: "DICOM toolkit applications"
-ldesc: "DCMTK is a collection of libraries and applications implementing 
-large parts the DICOM standard. It includes software for examining, 
-constructing and converting DICOM image files, handling offline media, 
-sending and receiving images over a network connection, as well as 
-demonstrative image storage and worklist servers."

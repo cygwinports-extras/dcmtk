@@ -1,0 +1,29 @@
+inherit cmake
+
+NAME="dcmtk"
+VERSION=3.6.0
+RELEASE=2
+CATEGORY="Graphics"
+SUMMARY="DICOM toolkit applications"
+DESCRIPTION="DCMTK is a collection of libraries and applications implementing
+large parts the DICOM standard. It includes software for examining, constructing
+and converting DICOM image files, handling offline media, sending and receiving
+images over a network connection, as well as demonstrative image storage and
+worklist servers."
+HOMEPAGE="http://dicom.offis.de/dcmtk.php.en"
+SRC_URI="ftp://dicom.offis.de/pub/dicom/offis/software/${PN}/${PN}${PV//.}/${P}.tar.gz"
+
+PKG_NAMES="${PN} lib${PN}-devel"
+dcmtk_CONTENTS="etc/ usr/bin/*.exe usr/share/"
+libdcmtk_devel_SUMMARY="DICOM toolkit (development)"
+libdcmtk_devel_REQUIRES="libpng-devel libtiff-devel libxml2-devel zlib-devel"
+libdcmtk_devel_CONTENTS="usr/include/ usr/lib/"
+
+CYGCMAKE_ARGS="-DDCMTK_WITH_XML=YES -DCMTK_WITH_OPENSSL=YES"
+
+src_install() {
+	cd ${B}
+	cyginstall
+	mv ${D}/usr/etc ${D}/
+	make_etc_defaults /etc/dcmtk
+}
