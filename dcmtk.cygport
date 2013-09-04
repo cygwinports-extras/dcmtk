@@ -11,9 +11,12 @@ and converting DICOM image files, handling offline media, sending and receiving
 images over a network connection, as well as demonstrative image storage and
 worklist servers."
 HOMEPAGE="http://dicom.offis.de/dcmtk.php.en"
-SRC_URI="ftp://dicom.offis.de/pub/dicom/offis/software/${PN}/${PN}${PV//.}/${P}.tar.gz"
+SRC_URI="ftp://dicom.offis.de/pub/dicom/offis/software/dcmtk/dcmtk${VERSION//.}/dcmtk-${VERSION}.tar.gz"
+PATCH_URI="
+	http://pkgs.fedoraproject.org/cgit/dcmtk.git/plain/dcmtk-3.6.0-0008-Compiler-Fixes.patch
+"
 
-PKG_NAMES="${PN} lib${PN}-devel"
+PKG_NAMES="${NAME} lib${NAME}-devel"
 dcmtk_CONTENTS="etc/ usr/bin/*.exe usr/share/"
 libdcmtk_devel_SUMMARY="DICOM toolkit (development)"
 libdcmtk_devel_REQUIRES="libpng-devel libtiff-devel libxml2-devel zlib-devel"
