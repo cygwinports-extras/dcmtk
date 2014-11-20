@@ -2,7 +2,7 @@ inherit cmake
 
 NAME="dcmtk"
 VERSION=3.6.0
-RELEASE=2
+RELEASE=3
 CATEGORY="Graphics"
 SUMMARY="DICOM toolkit applications"
 DESCRIPTION="DCMTK is a collection of libraries and applications implementing
@@ -14,19 +14,34 @@ HOMEPAGE="http://dicom.offis.de/dcmtk.php.en"
 SRC_URI="ftp://dicom.offis.de/pub/dicom/offis/software/dcmtk/dcmtk${VERSION//.}/dcmtk-${VERSION}.tar.gz"
 PATCH_URI="
 	http://pkgs.fedoraproject.org/cgit/dcmtk.git/plain/dcmtk-3.6.0-0008-Compiler-Fixes.patch
+	3.6.0-shared-libs.patch
 "
 
-PKG_NAMES="${NAME} lib${NAME}-devel"
-dcmtk_CONTENTS="etc/ usr/bin/*.exe usr/share/"
+PKG_NAMES="${NAME} lib${NAME}3.6 lib${NAME}-devel"
+dcmtk_CONTENTS="--exclude=*.dll etc/ usr/bin/ usr/share/"
+libdcmtk3_6_SUMMARY="DICOM toolkit (runtime)"
+libdcmtk3_6_CONTENTS="usr/bin/cyg*-3.6.dll"
 libdcmtk_devel_SUMMARY="DICOM toolkit (development)"
-libdcmtk_devel_REQUIRES="libpng-devel libtiff-devel libxml2-devel zlib-devel"
+libdcmtk_devel_REQUIRES="zlib-devel"
 libdcmtk_devel_CONTENTS="usr/include/ usr/lib/"
 
-CYGCMAKE_ARGS="-DDCMTK_WITH_XML=YES -DCMTK_WITH_OPENSSL=YES"
+CYGCMAKE_ARGS="
+	-DBUILD_SHARED_LIBS=YES
+	-DDCMTK_WITH_OPENSSL=YES
+	-DDCMTK_WITH_PNG=YES
+	-DDCMTK_WITH_PRIVATE_TAGS=ON
+	-DDCMTK_WITH_TIFF=YES
+	-DDCMTK_WITH_XML=YES
+	-DDCMTK_WITH_ZLIB=YES
+"
 
 src_install() {
 	cd ${B}
 	cyginstall
+
 	mv ${D}/usr/etc ${D}/
 	make_etc_defaults /etc/dcmtk
+
+	# internal APIs
+	rm -f ${D}/usr/lib/lib{charls,ijg*}.dll.a
 }
