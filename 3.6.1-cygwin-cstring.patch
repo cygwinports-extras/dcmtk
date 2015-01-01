@@ -1,0 +1,20 @@
+--- origsrc/dcmtk-3.6.1_20140617/ofstd/include/dcmtk/ofstd/ofstd.h	2014-06-17 04:23:18.000000000 -0500
++++ src/dcmtk-3.6.1_20140617/ofstd/include/dcmtk/ofstd/ofstd.h	2014-12-31 20:22:53.638351100 -0600
+@@ -101,7 +101,7 @@ class DCMTK_OFSTD_EXPORT OFStandard
+     static inline size_t strlcpy(char *dst, const char *src, size_t siz)
+     {
+ #ifdef HAVE_STRLCPY
+-      return ::strlcpy(dst, src, siz);
++      return strlcpy(dst, src, siz);
+ #else
+       return my_strlcpy(dst, src, siz);
+ #endif
+@@ -127,7 +127,7 @@ class DCMTK_OFSTD_EXPORT OFStandard
+     static inline size_t strlcat(char *dst, const char *src, size_t siz)
+     {
+ #ifdef HAVE_STRLCAT
+-      return ::strlcat(dst, src, siz);
++      return strlcat(dst, src, siz);
+ #else
+       return my_strlcat(dst, src, siz);
+ #endif
