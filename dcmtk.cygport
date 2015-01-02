@@ -2,7 +2,7 @@ inherit cmake
 
 NAME="dcmtk"
 VERSION=3.6.1_20140617
-RELEASE=1
+RELEASE=2
 CATEGORY="Graphics"
 SUMMARY="DICOM toolkit applications"
 DESCRIPTION="DCMTK is a collection of libraries and applications implementing
